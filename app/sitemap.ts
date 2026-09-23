@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site";
-import { getProjects } from "@/lib/content";
+import { getCaseStudyProjects } from "@/lib/content";
 
 /** NFR-SEO-07 — all indexable routes with lastmod, generated at build time. */
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteConfig.url}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
 
-  const projectRoutes: MetadataRoute.Sitemap = getProjects().map((p) => ({
+  const projectRoutes: MetadataRoute.Sitemap = getCaseStudyProjects().map((p) => ({
     url: `${siteConfig.url}/work/${p.slug}`,
     lastModified: now,
     changeFrequency: "monthly",

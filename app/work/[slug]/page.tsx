@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import { ArrowRight, ArrowLeft } from "lucide-react";
-import { getProjects, getProjectBySlug, getAdjacentProjects } from "@/lib/content";
+import { getCaseStudyProjects, getProjectBySlug, getAdjacentProjects } from "@/lib/content";
 import { buildMetadata, creativeWorkJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { Tag } from "@/components/ui/Tag";
 import { Button } from "@/components/ui/Button";
@@ -12,7 +12,7 @@ import { DesignGallery } from "@/components/sections/DesignGallery";
 import { BackToWork } from "@/components/sections/BackToWork";
 
 export function generateStaticParams() {
-  return getProjects().map((p) => ({ slug: p.slug }));
+  return getCaseStudyProjects().map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({

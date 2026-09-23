@@ -48,11 +48,17 @@ export function getProjectsByFilter(filter: FilterGroup): Project[] {
   return projectsData.filter((p) => p.filterGroups.includes(filter));
 }
 
+/** Projects that have a /work/<slug> page — a project without a `caseStudy` is card-only. */
+export function getCaseStudyProjects(): Project[] {
+  return projectsData.filter((p) => p.caseStudy);
+}
+
 export function getAdjacentProjects(slug: string) {
-  const idx = projectsData.findIndex((p) => p.slug === slug);
+  const list = getCaseStudyProjects();
+  const idx = list.findIndex((p) => p.slug === slug);
   if (idx === -1) return { prev: undefined, next: undefined };
-  const prev = projectsData[(idx - 1 + projectsData.length) % projectsData.length];
-  const next = projectsData[(idx + 1) % projectsData.length];
+  const prev = list[(idx - 1 + list.length) % list.length];
+  const next = list[(idx + 1) % list.length];
   return { prev, next };
 }
 
