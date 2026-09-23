@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <radialGradient id="g4" cx="35%" cy="56%" r="75%">
+      <stop offset="0%" stop-color="#7C74F0" stop-opacity="0.35"/>
+      <stop offset="45%" stop-color="#8FA3F5" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#B9C4EC" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="base4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#DDE3F7"/>
+      <stop offset="100%" stop-color="#B9C4EC"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#base4)"/>
+  <rect width="1600" height="900" fill="url(#g4)"/>
+  <line x1="0" y1="150.0" x2="1496.8" y2="78.0" stroke="#463ED2" stroke-opacity="0.08" stroke-width="1"/><line x1="0" y1="300.0" x2="1159.7" y2="228.0" stroke="#463ED2" stroke-opacity="0.10" stroke-width="1"/><line x1="0" y1="450.0" x2="1240.8" y2="378.0" stroke="#463ED2" stroke-opacity="0.07" stroke-width="1"/><line x1="0" y1="600.0" x2="1084.1" y2="528.0" stroke="#463ED2" stroke-opacity="0.08" stroke-width="1"/><line x1="0" y1="750.0" x2="1432.4" y2="678.0" stroke="#463ED2" stroke-opacity="0.12" stroke-width="1"/>
+  <circle cx="1045.4" cy="215.5" r="1.4" fill="#322AA8" fill-opacity="0.28"/><circle cx="981.4" cy="150.8" r="2.0" fill="#322AA8" fill-opacity="0.32"/><circle cx="2.2" cy="693.5" r="1.0" fill="#322AA8" fill-opacity="0.24"/><circle cx="754.6" cy="799.2" r="3.0" fill="#322AA8" fill-opacity="0.21"/><circle cx="670.9" cy="890.0" r="2.7" fill="#322AA8" fill-opacity="0.21"/><circle cx="857.1" cy="354.9" r="1.3" fill="#322AA8" fill-opacity="0.22"/><circle cx="49.0" cy="149.5" r="2.9" fill="#322AA8" fill-opacity="0.26"/><circle cx="834.4" cy="595.9" r="1.6" fill="#322AA8" fill-opacity="0.39"/>
+  <circle cx="559.5" cy="507.3" r="439.6" fill="none" stroke="#463ED2" stroke-opacity="0.25" stroke-width="1"/>
+  <rect x="0.5" y="0.5" width="1599" height="899" fill="none" stroke="#463ED2" stroke-opacity="0.24" stroke-width="1"/>
+  <text x="800" y="450" text-anchor="middle" dominant-baseline="middle" font-family="ui-monospace, monospace" font-size="29" letter-spacing="2" fill="#322AA8" fill-opacity="0.55">PLACEHOLDER — REPLACE BEFORE LAUNCH</text>
+</svg>

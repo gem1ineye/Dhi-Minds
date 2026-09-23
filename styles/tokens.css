@@ -1,0 +1,100 @@
+/**
+ * Design tokens — "Periwinkle Glass" (धी · Dhi Minds)
+ * Single source of truth. Components consume these via the Tailwind theme
+ * mapping in globals.css (@theme) — never raw hex values in components.
+ *
+ *   ink-*     deep navy-black: type and the solid primary button
+ *   mist-*    pale periwinkle surfaces (page base, bands, hairlines)
+ *   accent-*  indigo-violet: rules, icons, focus rings, accent text and buttons
+ *   blue-*    link colour (same family as accent)
+ *   glass-*   frosted white panels that sit over the ambient page glow
+ */
+:root {
+  /* Ink — navy-black for type and the primary pill button */
+  --ink-900: #101223;
+  --ink-800: #1c1f3a;
+  --ink-700: #2b2f52;
+
+  /* Accent — indigo-violet. accent-700 is the text-safe shade (≥ 4.7:1 on every surface, including the deepest part of the ambient glow). */
+  --accent-200: #c9c8fa; /* pale wash */
+  --accent-300: #a3a1f6; /* selection, tinted fills */
+  --accent-400: #6660f0; /* top of the accent button gradient; white text 4.7:1 */
+  --accent-500: #463ed2; /* rules, icons, focus ring — ≥ 3:1 on the glow */
+  --accent-700: #322aa8; /* eyebrow + inline accent text — ≥ 4.7:1 on the deepest part of the glow */
+
+  /* Links */
+  --blue-600: #322aa8;
+  --blue-500: #463ed2;
+
+  /* Neutrals — cool, blue-tinted */
+  --white: #ffffff;
+  --offwhite: #e4e8f6; /* page base */
+  --charcoal: #1c1f3a; /* body type */
+  --grey-500: #363c66; /* secondary type, ≥ 5.3:1 on the glow */
+  --grey-300: #bfc7e6; /* hairline borders */
+  --ink-border: rgba(79, 71, 221, 0.22); /* accent hairline */
+
+  /* Mist scale — pale periwinkle */
+  --mist-50: #f5f6fc;
+  --mist-100: #e4e8f6;
+  --mist-200: #d5dbf0;
+  --mist-300: #c3cbe8;
+
+  /* Glass — frosted white panels over the ambient glow */
+  --glass-fill: rgba(255, 255, 255, 0.4);
+  --glass-fill-strong: rgba(255, 255, 255, 0.66);
+  --glass-fill-soft: rgba(255, 255, 255, 0.24);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-blur: 22px;
+  --glass-saturate: 160%;
+  /* Bright top edge + a faint indigo outline so glass stays defined on the blue glow */
+  --glass-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.75),
+    0 0 0 1px rgba(60, 68, 160, 0.08),
+    0 1px 2px rgba(40, 48, 120, 0.06),
+    0 14px 34px -10px rgba(40, 48, 130, 0.24);
+  --glass-shadow-lift:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 0 0 1px rgba(79, 71, 221, 0.24),
+    0 2px 4px rgba(40, 48, 120, 0.08),
+    0 24px 50px -12px rgba(40, 48, 130, 0.34);
+
+  /* Orbs — soft colour pools placed behind glass so the frosting is visible */
+  --orb-violet: radial-gradient(closest-side, rgba(126, 112, 244, 0.5), rgba(126, 112, 244, 0.16) 62%, transparent);
+  --orb-sky: radial-gradient(closest-side, rgba(112, 160, 246, 0.5), rgba(112, 160, 246, 0.16) 62%, transparent);
+
+  --orb-white: radial-gradient(closest-side, rgba(255, 255, 255, 0.32), transparent);
+
+  /* Motion timing (PRD §12.2) — durations aren't Tailwind theme keys, kept here for reuse in inline styles */
+  --duration-instant: 120ms;
+  --duration-fast: 200ms;
+  --duration-base: 320ms;
+  --duration-slow: 500ms;
+
+  /*
+   * Radius, shadow, and easing tokens live in globals.css's `@theme` block,
+   * not here — that's what makes Tailwind generate rounded-sm / shadow-card
+   * / ease-standard utilities from them, and it emits real :root custom
+   * properties too, so `var(--radius-sm)` etc. still resolves everywhere.
+   */
+}
+
+/* No backdrop-filter support (older browsers): fall back to near-opaque mist so text stays legible. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  :root {
+    --glass-fill: rgba(240, 243, 252, 0.94);
+    --glass-fill-strong: rgba(244, 246, 253, 0.98);
+    --glass-fill-soft: rgba(228, 232, 246, 0.86);
+  }
+}
+
+/* Honour the OS "reduce transparency" setting: solid pale surfaces, no blur. */
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --glass-fill: rgba(240, 243, 252, 0.97);
+    --glass-fill-strong: rgba(246, 247, 253, 1);
+    --glass-fill-soft: rgba(230, 234, 247, 0.92);
+    --glass-blur: 0px;
+    --glass-saturate: 100%;
+  }
+}

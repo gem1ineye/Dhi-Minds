@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <radialGradient id="g9" cx="52%" cy="33%" r="75%">
+      <stop offset="0%" stop-color="#7C74F0" stop-opacity="0.35"/>
+      <stop offset="45%" stop-color="#8FA3F5" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#B9C4EC" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="base9" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#DDE3F7"/>
+      <stop offset="100%" stop-color="#B9C4EC"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#base9)"/>
+  <rect width="1600" height="1000" fill="url(#g9)"/>
+  <line x1="0" y1="166.7" x2="1040.5" y2="86.7" stroke="#463ED2" stroke-opacity="0.08" stroke-width="1"/><line x1="0" y1="333.3" x2="960.6" y2="253.3" stroke="#463ED2" stroke-opacity="0.07" stroke-width="1"/><line x1="0" y1="500.0" x2="1330.3" y2="420.0" stroke="#463ED2" stroke-opacity="0.11" stroke-width="1"/><line x1="0" y1="666.7" x2="1256.9" y2="586.7" stroke="#463ED2" stroke-opacity="0.08" stroke-width="1"/><line x1="0" y1="833.3" x2="1103.9" y2="753.3" stroke="#463ED2" stroke-opacity="0.06" stroke-width="1"/>
+  <circle cx="471.8" cy="666.7" r="2.8" fill="#322AA8" fill-opacity="0.26"/><circle cx="14.3" cy="620.5" r="1.9" fill="#322AA8" fill-opacity="0.44"/><circle cx="913.3" cy="372.7" r="1.9" fill="#322AA8" fill-opacity="0.26"/><circle cx="719.3" cy="355.3" r="2.8" fill="#322AA8" fill-opacity="0.22"/><circle cx="1545.8" cy="74.6" r="2.4" fill="#322AA8" fill-opacity="0.41"/><circle cx="291.7" cy="666.2" r="2.9" fill="#322AA8" fill-opacity="0.39"/><circle cx="729.7" cy="118.0" r="2.6" fill="#322AA8" fill-opacity="0.34"/><circle cx="1062.4" cy="158.3" r="1.2" fill="#322AA8" fill-opacity="0.50"/>
+  <circle cx="829.3" cy="330.1" r="446.4" fill="none" stroke="#463ED2" stroke-opacity="0.25" stroke-width="1"/>
+  <rect x="0.5" y="0.5" width="1599" height="999" fill="none" stroke="#463ED2" stroke-opacity="0.24" stroke-width="1"/>
+  <text x="800" y="500" text-anchor="middle" dominant-baseline="middle" font-family="ui-monospace, monospace" font-size="29" letter-spacing="2" fill="#322AA8" fill-opacity="0.55">PLACEHOLDER — DESIGN GALLERY</text>
+</svg>

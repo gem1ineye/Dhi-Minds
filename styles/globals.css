@@ -1,0 +1,259 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+@theme inline {
+  /* Colour — mapped 1:1 from tokens.css, no raw hex in components */
+  --color-ink-900: var(--ink-900);
+  --color-ink-800: var(--ink-800);
+  --color-ink-700: var(--ink-700);
+  --color-blue-600: var(--blue-600);
+  --color-blue-500: var(--blue-500);
+  --color-accent-400: var(--accent-400);
+  --color-accent-500: var(--accent-500);
+  --color-accent-300: var(--accent-300);
+  --color-accent-200: var(--accent-200);
+  --color-accent-700: var(--accent-700);
+  --color-white: var(--white);
+  --color-offwhite: var(--offwhite);
+  --color-charcoal: var(--charcoal);
+  --color-grey-500: var(--grey-500);
+  --color-grey-300: var(--grey-300);
+  --color-ink-border: var(--ink-border);
+  --color-mist-50: var(--mist-50);
+  --color-mist-100: var(--mist-100);
+  --color-mist-200: var(--mist-200);
+  --color-mist-300: var(--mist-300);
+
+  /* Typography */
+  /* One sans family for Latin text (Inter). Headings share it, matching the fintech-dashboard look. */
+  --font-display: var(--font-body-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sanskrit: var(--font-sanskrit-sans), "Noto Sans Devanagari", "Kohinoor Devanagari", "Devanagari Sangam MN", sans-serif;
+  --font-body: var(--font-body-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  /* Fluid type scale — PRD §7.5 */
+  --text-display-xl: clamp(2.5rem, 1.6rem + 4.2vw, 4.75rem);
+  --text-display-lg: clamp(2rem, 1.4rem + 2.9vw, 3.25rem);
+  --text-heading-md: clamp(1.5rem, 1.28rem + 1vw, 2rem);
+  --text-heading-sm: clamp(1.25rem, 1.16rem + 0.4vw, 1.375rem);
+  --text-body-lg: clamp(1.0625rem, 0.98rem + 0.4vw, 1.25rem);
+  --text-body: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --text-body-sm: 0.875rem;
+  --text-eyebrow: clamp(0.6875rem, 0.65rem + 0.15vw, 0.75rem);
+
+  /* Radius — generous, rounded scale (was 6/12/20) */
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+
+  /* Shadow — PRD §7.6, two elevation levels only (indigo-tinted) */
+  --shadow-card: 0 1px 2px rgba(40, 48, 120, 0.07), 0 8px 24px rgba(40, 48, 130, 0.12);
+  --shadow-lift: 0 2px 4px rgba(40, 48, 120, 0.1), 0 16px 40px rgba(40, 48, 130, 0.22);
+
+  /* Easing — PRD §12.2 */
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Breakpoints — PRD §13.1 */
+  --breakpoint-xs: 20rem;
+  --breakpoint-sm: 30rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 90rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--grey-300);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    background-color: var(--mist-100);
+    color: var(--charcoal);
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /*
+   * Ambient glow — fixed periwinkle, violet and sky colour pools behind the
+   * whole page, deepest at the top-left and fading to pale at the bottom
+   * right. Glass panels blur and tint these as content scrolls past, which is
+   * what makes the frosting readable. Plain gradients (no filter: blur) keep
+   * it cheap to paint on mobile. Keep the strongest pool light enough that
+   * secondary text on it stays above 4.5:1.
+   */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(58rem 42rem at 6% -8%, rgba(120, 132, 228, 0.32), transparent 64%),
+      radial-gradient(48rem 38rem at 98% 10%, rgba(150, 118, 244, 0.36), transparent 62%),
+      radial-gradient(54rem 42rem at 2% 68%, rgba(120, 166, 246, 0.4), transparent 64%),
+      radial-gradient(46rem 36rem at 94% 96%, rgba(176, 150, 246, 0.4), transparent 62%),
+      linear-gradient(160deg, #b6c1ea 0%, #c8cfee 45%, #dde1f5 100%);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-500);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--accent-300);
+    color: var(--ink-900);
+  }
+}
+
+@layer utilities {
+  .measure {
+    max-width: 68ch;
+  }
+  .measure-display {
+    max-width: 22ch;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -100px;
+    z-index: 200;
+    background: var(--ink-900);
+    color: var(--mist-50);
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--accent-500);
+    transition: top var(--duration-fast) var(--ease-standard);
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+
+}
+
+/*
+ * Glass surfaces. Use on cards, bars, and panels — not on full-width section
+ * backgrounds (large backdrop blurs are expensive to repaint while scrolling).
+ * Avoid nesting one glass surface inside another.
+ */
+@utility glass {
+  background: var(--glass-fill);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+@utility glass-strong {
+  background: var(--glass-fill-strong);
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 1.4)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(calc(var(--glass-blur) * 1.4)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+@utility glass-soft {
+  background: var(--glass-fill-soft);
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.7)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(calc(var(--glass-blur) * 0.7)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+/* Interactive glass: lifts and brightens on hover / keyboard focus. */
+@utility glass-lift {
+  transition:
+    transform var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard),
+    background-color var(--duration-fast) var(--ease-standard);
+  &:hover,
+  &:focus-within {
+    transform: translateY(-2px);
+    background: var(--glass-fill-strong);
+    box-shadow: var(--glass-shadow-lift);
+  }
+}
+
+/* Full-width bars (navbar, drawer, footer): frosted, but flat — no outer ring or drop shadow, so no stray edge lines. */
+@utility glass-flat {
+  background: var(--glass-fill-strong);
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.9)) saturate(180%);
+  backdrop-filter: blur(calc(var(--glass-blur) * 0.9)) saturate(180%);
+}
+
+@utility orb-violet {
+  background-image: var(--orb-violet);
+}
+
+@utility orb-sky {
+  background-image: var(--orb-sky);
+}
+
+@utility orb-white {
+  background-image: var(--orb-white);
+}
+
+/* Hero mock websites — text inside them scales with the card via container-query units. */
+.mock-text {
+  font-size: 8px;
+}
+@supports (width: 1cqw) {
+  .mock-text {
+    font-size: max(6px, 3.6cqw);
+  }
+}
+
+/* Cards rise into place on load. Pure CSS so the hero is complete without JS; reduced-motion is handled by the global rule. */
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility animate-card-in {
+  animation: card-in 700ms var(--ease-standard) both;
+  animation-delay: var(--card-delay, 0ms);
+}
+
+/* No entrance at all under reduced motion — cards are simply there, so nothing waits on a delay. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-card-in {
+    animation: none;
+  }
+}
