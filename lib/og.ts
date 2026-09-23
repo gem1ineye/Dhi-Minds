@@ -1,5 +1,4 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
+import type { LogoColors } from "@/components/ui/LogoSvg";
 
 /**
  * Brand colours for generated images (favicon, app icon, social cards).
@@ -17,15 +16,5 @@ export const ogColors = {
   accent700: "#322AA8",
 } as const;
 
-export const SANSKRIT_FONT_FAMILY = "Hind";
-
-/**
- * Hind SemiBold, subset to just the glyphs of "धी" (≈5 KB) — Satori's
- * default fonts have no Devanagari, so without this the wordmark would
- * render as empty boxes. Add glyphs to the subset (pyftsubset) before using
- * this font for any other Sanskrit text.
- */
-export async function loadSanskritFont() {
-  const data = await readFile(join(process.cwd(), "assets/fonts/Hind-SemiBold-dhi.ttf"));
-  return { name: SANSKRIT_FONT_FAMILY, data, style: "normal" as const, weight: 600 as const };
-}
+/** The logo's colours as the page uses them (components/ui/Logo.tsx), in hex. */
+export const ogLogoColors: LogoColors = { dhi: ogColors.accent700, minds: ogColors.ink };

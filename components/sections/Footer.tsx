@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { Mail, Phone } from "lucide-react";
 import { getFooterColumns, getCompany } from "@/lib/content";
-import { Wordmark } from "@/components/ui/Wordmark";
+import { Logo } from "@/components/ui/Logo";
+import { GlyphSvg } from "@/components/ui/LogoSvg";
 
 /** FR-FOOT-01..06 — PRD §8.15. */
 export function Footer() {
@@ -10,22 +11,20 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="glass-flat relative border-t border-accent-500/25 bg-white/30 text-grey-500">
+    <footer className="glass-flat relative border-t border-accent-500/25 bg-white/30 pb-24 text-grey-500 md:pb-0">
       <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <Link href="/" className="text-xl">
-              <Wordmark />
+            <Link href="/" className="inline-block focus-visible:outline-2 focus-visible:outline-accent-500 focus-visible:outline-offset-4">
+              <Logo className="h-12" />
             </Link>
             <p className="mt-4 max-w-xs text-sm text-grey-500">
               A digital and product studio — websites, SaaS, and applications, backed by SEO,
               creative, and strategy.
             </p>
-            <p className="mt-3 max-w-xs text-xs text-grey-500">
-              <span lang="sa" className="font-sanskrit text-base text-ink-900">
-                धी
-              </span>{" "}
-              (dhī) — Sanskrit for intellect, insight, and clear thought.
+            <p className="mt-3 flex max-w-xs items-center gap-2 text-xs text-grey-500">
+              <GlyphSvg aria-hidden="true" color="var(--accent-700)" className="h-5 w-auto shrink-0" />
+              <span>(dhī) — Sanskrit for intellect, insight, and clear thought.</span>
             </p>
             {company.socials.length > 0 && (
               <ul className="mt-6 flex items-center gap-3">

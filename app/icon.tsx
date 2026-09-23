@@ -1,12 +1,14 @@
 import { ImageResponse } from "next/og";
-import { loadSanskritFont, ogColors, SANSKRIT_FONT_FAMILY } from "@/lib/og";
+import { GlyphSvg } from "@/components/ui/LogoSvg";
+import { GLYPH_HEIGHT, GLYPH_WIDTH } from "@/components/ui/logo-art";
+import { ogColors } from "@/lib/og";
 
 export const size = { width: 32, height: 32 };
 export const contentType = "image/png";
 
-/** Favicon — a white Sanskrit "धी" on the indigo accent gradient, so it stays visible on light browser tabs. Replace with the approved mark when FR-BRD-08 is decided. */
-export default async function Icon() {
-  const font = await loadSanskritFont();
+/** Favicon — the logo's धी in white on the accent gradient; the full mark is too detailed to read at 16–32px (FR-BRD-08). */
+export default function Icon() {
+  const glyphWidth = 20;
   return new ImageResponse(
     (
       <div
@@ -17,17 +19,12 @@ export default async function Icon() {
           alignItems: "center",
           justifyContent: "center",
           background: `linear-gradient(135deg, ${ogColors.accent400}, ${ogColors.accent500})`,
-          color: "#FFFFFF",
-          fontSize: 21,
-          fontFamily: SANSKRIT_FONT_FAMILY,
-          fontWeight: 600,
-          borderRadius: 9,
-          paddingBottom: 2,
+          borderRadius: 8,
         }}
       >
-        धी
+        <GlyphSvg color="#FFFFFF" width={glyphWidth} height={Math.round((glyphWidth * GLYPH_HEIGHT) / GLYPH_WIDTH)} />
       </div>
     ),
-    { ...size, fonts: [font] },
+    { ...size },
   );
 }

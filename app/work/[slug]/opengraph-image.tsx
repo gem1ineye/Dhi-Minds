@@ -1,6 +1,8 @@
 import { ImageResponse } from "next/og";
 import { getProjectBySlug } from "@/lib/content";
-import { loadSanskritFont, ogColors, SANSKRIT_FONT_FAMILY } from "@/lib/og";
+import { LogoSvg } from "@/components/ui/LogoSvg";
+import { LOGO_HEIGHT, LOGO_WIDTH } from "@/components/ui/logo-art";
+import { ogColors, ogLogoColors } from "@/lib/og";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -10,7 +12,7 @@ export const contentType = "image/png";
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
-  const font = await loadSanskritFont();
+  const logoWidth = 150;
 
   return new ImageResponse(
     (
@@ -27,18 +29,22 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <span style={{ fontSize: 44, lineHeight: 1, fontFamily: SANSKRIT_FONT_FAMILY, fontWeight: 600, color: ogColors.ink }}>धी</span>
-          <div style={{ width: 28, height: 2, background: ogColors.accent500 }} />
-          <span style={{ fontSize: 18, letterSpacing: 4, textTransform: "uppercase", color: ogColors.accent700 }}>
-            {project ? `${project.category} · ${project.year}` : "Dhi Minds"}
-          </span>
+        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+          <LogoSvg colors={ogLogoColors} width={logoWidth} height={Math.round((logoWidth * LOGO_HEIGHT) / LOGO_WIDTH)} />
+          {project && (
+            <>
+              <div style={{ width: 28, height: 2, background: ogColors.accent500 }} />
+              <span style={{ fontSize: 18, letterSpacing: 4, textTransform: "uppercase", color: ogColors.accent700 }}>
+                {`${project.category} · ${project.year}`}
+              </span>
+            </>
+          )}
         </div>
         <div style={{ display: "flex", marginTop: 32, fontSize: 54, fontWeight: 600, maxWidth: 940, lineHeight: 1.15 }}>
           {project?.title ?? "Dhi Minds"}
         </div>
       </div>
     ),
-    { ...size, fonts: [font] },
+    { ...size },
   );
 }

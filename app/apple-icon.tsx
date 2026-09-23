@@ -1,12 +1,14 @@
 import { ImageResponse } from "next/og";
-import { loadSanskritFont, ogColors, SANSKRIT_FONT_FAMILY } from "@/lib/og";
+import { GlyphSvg } from "@/components/ui/LogoSvg";
+import { GLYPH_HEIGHT, GLYPH_WIDTH } from "@/components/ui/logo-art";
+import { ogColors } from "@/lib/og";
 
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
-/** Home-screen icon — see app/icon.tsx and FR-BRD-08. */
-export default async function AppleIcon() {
-  const font = await loadSanskritFont();
+/** Home-screen icon — full-bleed square, since iOS applies its own corner mask. See app/icon.tsx and FR-BRD-08. */
+export default function AppleIcon() {
+  const glyphWidth = 104;
   return new ImageResponse(
     (
       <div
@@ -17,16 +19,11 @@ export default async function AppleIcon() {
           alignItems: "center",
           justifyContent: "center",
           background: `linear-gradient(135deg, ${ogColors.accent400}, ${ogColors.accent500})`,
-          color: "#FFFFFF",
-          fontSize: 112,
-          fontFamily: SANSKRIT_FONT_FAMILY,
-          fontWeight: 600,
-          paddingBottom: 10,
         }}
       >
-        धी
+        <GlyphSvg color="#FFFFFF" width={glyphWidth} height={Math.round((glyphWidth * GLYPH_HEIGHT) / GLYPH_WIDTH)} />
       </div>
     ),
-    { ...size, fonts: [font] },
+    { ...size },
   );
 }

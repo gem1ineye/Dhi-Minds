@@ -27,7 +27,6 @@
   /* Typography */
   /* One sans family for Latin text (Inter). Headings share it, matching the fintech-dashboard look. */
   --font-display: var(--font-body-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-sanskrit: var(--font-sanskrit-sans), "Noto Sans Devanagari", "Kohinoor Devanagari", "Devanagari Sangam MN", sans-serif;
   --font-body: var(--font-body-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
 
@@ -212,6 +211,34 @@
   backdrop-filter: blur(calc(var(--glass-blur) * 0.9)) saturate(180%);
 }
 
+/*
+ * Mobile dock: clearer than panel glass — a thin tint under a bright top sheen and specular edges, with a
+ * heavy blur keeping the labels legible over whatever scrolls beneath. Built on the --glass-* tokens, so it
+ * falls back to a near-solid panel without backdrop-filter or under "reduce transparency", like the others.
+ */
+@utility glass-dock {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3)),
+    var(--glass-fill-soft);
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 1.3)) saturate(200%);
+  backdrop-filter: blur(calc(var(--glass-blur) * 1.3)) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.35),
+    0 0 0 1px rgba(60, 68, 160, 0.1),
+    0 20px 44px -16px rgba(40, 48, 130, 0.45);
+}
+
+/* A small, brighter pane of glass with an accent edge — the dock's active tab. */
+@utility glass-lens {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.55));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    0 0 0 1px rgba(70, 62, 210, 0.28),
+    0 6px 16px -6px rgba(70, 62, 210, 0.5);
+}
+
 @utility orb-violet {
   background-image: var(--orb-violet);
 }
@@ -254,6 +281,28 @@
 /* No entrance at all under reduced motion — cards are simply there, so nothing waits on a delay. */
 @media (prefers-reduced-motion: reduce) {
   .animate-card-in {
+    animation: none;
+  }
+}
+
+/* Mobile dock glides up from the bottom edge once the page has settled. */
+@keyframes dock-in {
+  from {
+    opacity: 0;
+    transform: translateY(32px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility animate-dock-in {
+  animation: dock-in 600ms var(--ease-standard) 250ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-dock-in {
     animation: none;
   }
 }

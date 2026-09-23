@@ -1,43 +1,23 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
-import type { NavItem, Company } from "@/content/schema";
+import type { NavItem } from "@/content/schema";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
-import { Wordmark } from "@/components/ui/Wordmark";
-import { MobileDrawer } from "./MobileDrawer";
+import { Logo } from "@/components/ui/Logo";
+import { MobileDock } from "./MobileDock";
 import { useActiveSection } from "./useActiveSection";
 
 const SECTION_IDS = ["services", "work", "about", "process", "pricing", "faq", "contact"];
 
-/** FR-NAV-01..09 — PRD §8.1. */
-export function Navbar({
-  navItems,
-  cta,
-  company,
-}: {
-  navItems: NavItem[];
-  cta: NavItem;
-  company: Company;
-}) {
+/** FR-NAV-01..09 — PRD §8.1. Desktop shows the link bar; below `md` navigation is the glass dock (MobileDock). */
+export function Navbar({ navItems, cta }: { navItems: NavItem[]; cta: NavItem }) {
   const [scrolled, setScrolled] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(false);
   const pathname = usePathname();
   const isHome = pathname === "/";
   const active = useActiveSection(isHome ? SECTION_IDS : []);
-  const triggerId = useId();
-
-  // Close the drawer on navigation. Derived during render (React's
-  // "adjusting state when a prop changes" pattern) rather than an effect,
-  // since pathname is already available synchronously — no extra render.
-  const [lastPathname, setLastPathname] = useState(pathname);
-  if (pathname !== lastPathname) {
-    setLastPathname(pathname);
-    setDrawerOpen(false);
-  }
 
   useEffect(() => {
     const sentinel = document.getElementById("scroll-sentinel");
@@ -72,13 +52,13 @@ export function Navbar({
         <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12">
           <Link
             href="/"
-            className="text-lg focus-visible:outline-2 focus-visible:outline-accent-500 focus-visible:outline-offset-4"
+            className="flex items-center focus-visible:outline-2 focus-visible:outline-accent-500 focus-visible:outline-offset-4"
           >
-            <Wordmark />
+            <Logo className="h-9 lg:h-10" />
           </Link>
 
           <nav aria-label="Primary" className="hidden md:block">
-            <ul className="flex items-center gap-8">
+            <ul className="flex items-center gap-4 lg:gap-8">
               {navItems.map((item) => {
                 const sectionId = item.href.startsWith("/#") ? item.href.slice(2) : null;
                 const isActive = Boolean(sectionId && sectionId === active);
@@ -106,33 +86,13 @@ export function Navbar({
             </ul>
           </nav>
 
-          <div className="flex items-center gap-3">
-            <Button href={cta.href} variant="accent" size="sm" className="hidden md:inline-flex">
-              {cta.label}
-            </Button>
-            <button
-              id={triggerId}
-              type="button"
-              aria-expanded={drawerOpen}
-              aria-controls="mobile-drawer"
-              aria-label={drawerOpen ? "Close menu" : "Open menu"}
-              onClick={() => setDrawerOpen((v) => !v)}
-              className="relative flex size-10 items-center justify-center rounded-full text-ink-900 md:hidden"
-            >
-              <Menu
-                aria-hidden="true"
-                className={cn("absolute size-6 transition-all duration-300", drawerOpen ? "rotate-90 opacity-0" : "rotate-0 opacity-100")}
-              />
-              <X
-                aria-hidden="true"
-                className={cn("absolute size-6 transition-all duration-300", drawerOpen ? "rotate-0 opacity-100" : "-rotate-90 opacity-0")}
-              />
-            </button>
-          </div>
+          <Button href={cta.href} variant="accent" size="sm" className="hidden md:inline-flex">
+            {cta.label}
+          </Button>
         </div>
       </header>
 
-      <MobileDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} navItems={navItems} cta={cta} company={company} />
+      <MobileDock navItems={navItems} activeSection={active} />
     </>
   );
 }

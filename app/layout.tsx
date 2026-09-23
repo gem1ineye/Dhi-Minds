@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Geist_Mono, Hind } from "next/font/google";
+import { Inter, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "@/styles/globals.css";
 import { Navbar } from "@/components/sections/Navbar";
@@ -13,15 +13,6 @@ const inter = Inter({
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600"],
   variable: "--font-body-sans",
-  display: "swap",
-  preload: true,
-});
-
-/** Sanskrit wordmark face — a clean Devanagari sans that pairs with Inter. */
-const hindSanskrit = Hind({
-  subsets: ["devanagari"],
-  weight: "600",
-  variable: "--font-sanskrit-sans",
   display: "swap",
   preload: true,
 });
@@ -56,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const siteJsonLd = websiteJsonLd();
 
   return (
-    <html lang="en" className={`${inter.variable} ${hindSanskrit.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${inter.variable} ${geistMono.variable}`}>
       <body>
         <Script
           id="org-jsonld"
@@ -71,7 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="relative h-0">
           <div id="scroll-sentinel" className="absolute top-6 h-px w-px" />
         </div>
-        <Navbar navItems={getPrimaryNav()} cta={getNavCta()} company={company} />
+        <Navbar navItems={getPrimaryNav()} cta={getNavCta()} />
         <main id="main-content">{children}</main>
         <Footer />
         <WhatsAppBubble whatsappNumber={company.whatsappNumber} />

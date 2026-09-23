@@ -17,16 +17,6 @@ export function Hero() {
       />
       <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 px-6 sm:px-8 lg:grid-cols-12 lg:gap-8 lg:px-12">
         <div className="flex flex-col gap-7 lg:col-span-7">
-          {/* धी is Sanskrit for intellect and insight. Devanagari gets no tracking or uppercasing — both break its shaping. */}
-          <span className="glass-soft inline-flex w-fit items-center gap-3 rounded-full py-1.5 pl-4 pr-5">
-            <span aria-hidden="true" lang="sa" className="font-sanskrit text-2xl leading-none text-ink-900">
-              धी
-            </span>
-            <span aria-hidden="true" className="size-1.5 rounded-full bg-accent-500" />
-            <span className="font-mono text-[length:var(--text-eyebrow)] font-medium uppercase tracking-[0.12em] text-accent-700">
-              <span className="sr-only">Dhi </span>Minds
-            </span>
-          </span>
           <HeroHeadline />
           <p className="measure text-[length:var(--text-body-lg)] leading-relaxed text-grey-500">
             We design and build high-performing websites, SaaS products, digital experiences, and
